@@ -4,12 +4,27 @@ Github Action for publishing your modules on your own registry.
 ## Customizing
 ### Inputs
 
-| Name          | Type   | Description                                                                  |
-|-------------- |--------|----------------------------------------------------------------------------- |
-| `api-key`     | String | API Key used to authenticate to the registry.                                |
-| `hostname`    | String | AWS access key id part of the aws credentials. This is used to login to EKS. |
-| `namespace`   | String | AWS region to use. This must match the region your desired cluster lies in.  |
-| `module-name` | String | The name of the desired cluster.                                             |
-| `system`      | String | If you wish to assume an admin role, provide the role arn here to login as.  |
-| `version`     | String | Comma separated list of helm values files.                                   |
-| `path`        | String | Kubernetes namespace to use.                                                 |
+| Name          | Type   | Description                                                                                                                  |
+|-------------- |--------|------------------------------------------------------------------------------------------------------------------------------|
+| `api-key`     | String | API Key used to authenticate to the registry.                                                                                |
+| `hostname`    | String | URL of your registry.                                                                                                        |
+| `namespace`   | String | Is the name of a namespace, unique on a particular hostname, that can contain one or more modules that are somehow related.  |
+| `module-name` | String | Name of the module.                                                                                                          |
+| `system`      | String |Name of a remote system that the module is primarily written to target.                                                       |
+| `version`     | String | Version of the module.                                                                                                       |
+| `path`        | String | ath where the code is.                                                                                                       |
+
+## Example usage
+```yaml
+uses: craftech-io/publish-terraform-module-action@v1
+with:
+  api-key: ${{ secrets.API_KEY }}
+  hostname: https://registry.acme.com
+  namespace: example
+  module-name: ecr
+  system: aws
+  version: v1.0.0
+  path: modules/
+```
+
+The example above will upload your code to `https://registry.acme.com/example/ecr/aws/v1.0.0`
