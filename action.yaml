@@ -24,7 +24,7 @@ inputs:
   version:
     description: 'Version of the module.'
     required: true
-  path:
+  modules-path:
     description: 'Path where the code is.'
     required: true
     default: 'modules/'
@@ -39,4 +39,4 @@ runs:
       NAME: ${{ inputs.module-name }}
       SYSTEM: ${{ inputs.system }}
       VERSION: ${{ inputs.version }}
-      PATH: ${{ inputs.path }}
+      MODULES_PATH: ${{ inputs.path }}
