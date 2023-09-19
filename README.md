@@ -4,10 +4,6 @@ Github Action for publishing your modules on your own registry.
 ## Customizing
 ### Inputs
 
-name: `api-key`
-type: String
-description: API Key used to authenticate to the registry.
-
 | Name          | Type   | Description                                                                  |
 |-------------- |--------|----------------------------------------------------------------------------- |
 | `api-key`     | String | API Key used to authenticate to the registry.                                |
