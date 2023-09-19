@@ -12,7 +12,7 @@ Github Action for publishing your modules on your own registry.
 | `module-name` | String | Name of the module.                                                                                                          |
 | `system`      | String |Name of a remote system that the module is primarily written to target.                                                       |
 | `version`     | String | Version of the module.                                                                                                       |
-| `path`        | String | ath where the code is.                                                                                                       |
+| `modules-path`| String | ath where the code is.                                                                                                       |
 
 ## Example usage
 ```yaml
@@ -24,7 +24,7 @@ with:
   module-name: ecr
   system: aws
   version: v1.0.0
-  path: modules/
+  modules-path: modules/
 ```
 
 The example above will upload your code to `https://registry.acme.com/example/ecr/aws/v1.0.0`
