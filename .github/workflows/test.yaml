@@ -22,7 +22,7 @@ jobs:
           NAMESPACE: ""
           NAME: testModule
           SYSTEM: aws
-          VERSION: v0.1.0
+          VERSION: v0.1.1
           MODULE_PATH: ./test/
         run:
           bash ./push_repository.sh
