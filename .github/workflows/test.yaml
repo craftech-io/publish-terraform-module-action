@@ -9,15 +9,12 @@ jobs:
   test-action:
     name: Test action
     runs-on: ubuntu-latest
+    environment: Production
     timeout-minutes: 3
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      
-      - name: Set env vars
-        run: |
-          echo "ENVIRONMENT=production" >> $GITHUB_ENV
-          
+
       - name: Upload module
         env: 
           API_KEY: ${{ secrets.API_KEY }}
