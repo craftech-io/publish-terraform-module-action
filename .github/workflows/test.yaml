@@ -19,7 +19,7 @@ jobs:
         env: 
           API_KEY: ${{ secrets.API_KEY }}
           HOSTNAME: ${{ secrets.HOSTNAME }}
-          NAMESPACE: ${{ secrets.NAMESPACE }}
+          NAMESPACE: ""
           NAME: testModule
           SYSTEM: aws
           VERSION: v0.1.0
