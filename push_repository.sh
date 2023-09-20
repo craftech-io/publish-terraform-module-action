@@ -23,9 +23,7 @@ function check_if_empty {
 
 check_if_empty $HOSTNAME "hostname"
 
-if [[ "$HOSTNAME" =~ ^https://.*[^/]$ ]]; then
-        log_info "The hostname '$HOSTNAME' is valid."
-else
+if [[ ! "$HOSTNAME" =~ ^https://.*[^/]$ ]]; then
         log_error "The hostname '$HOSTNAME' is invalid."
 fi
 
