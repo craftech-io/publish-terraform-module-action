@@ -1,9 +1,7 @@
 FROM public.ecr.aws/docker/library/python:3.9.13-slim-buster
 
-RUN apt -y update && apt -y install curl \
-    && pip install awscli \
-    && curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash \
+RUN apt -y update && apt -y install curl
 
-COPY push_repository.sh /usr/local/bin/push_repository
+COPY push_repository.sh /push_repository.sh
 
-CMD push_repository
+ENTRYPOINT ["/push_repository.sh"]
