@@ -25,4 +25,4 @@ jobs:
           VERSION: v0.1.0
           MODULE_PATH: ./test/
         run:
-          bash ./push-repository.sh
+          bash ./push_repository.sh
