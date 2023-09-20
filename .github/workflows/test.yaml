@@ -20,9 +20,9 @@ jobs:
           API_KEY: ${{ secrets.API_KEY }}
           HOSTNAME: ${{ secrets.HOSTNAME }}
           NAMESPACE: ${{ secrets.NAMESPACE }}
-          NAME:
+          NAME: testModule
           SYSTEM: aws
-          VERSION: v0.1.1
+          VERSION: 
           MODULE_PATH: ./test/
         run:
           bash ./push_repository.sh
