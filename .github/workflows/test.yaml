@@ -1,0 +1,28 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-action:
+    name: Test action
+    runs-on: ubuntu-latest
+    environment: Production
+    timeout-minutes: 3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Upload module
+        env: 
+          API_KEY: ${{ secrets.API_KEY }}
+          HOSTNAME: ${{ secrets.HOSTNAME }}
+          NAMESPACE: ${{ secrets.NAMESPACE }}
+          NAME: testModule
+          SYSTEM: aws
+          VERSION: v0.1.1
+          MODULE_PATH: ./test/
+        run:
+          bash ./push_repository.sh

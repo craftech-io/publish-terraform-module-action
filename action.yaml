@@ -1,0 +1,42 @@
+# action.yml
+name: 'Terraform push to private registry'
+description: 'Publish custom modules to your private registry'
+branding:
+    icon: anchor
+    color: yellow
+inputs:
+  api-key:
+    description: 'API Key used to authenticate to the registry.'
+    required: true
+  hostname:
+    description: 'URL of your registry.'
+    required: true
+  namespace:
+    description: 'Is the name of a namespace, unique on a particular hostname, that can contain one or more modules that are somehow related.'
+    required: true
+  module-name:
+    description: 'Name of the module.'
+    required: true
+  system:
+    description: 'Name of a remote system that the module is primarily written to target.'
+    required: true
+    default: 'aws'
+  version:
+    description: 'Version of the module.'
+    required: true
+  modules-path:
+    description: 'Path where the code is.'
+    required: true
+    default: 'modules/'
+
+runs:
+    using: 'docker'
+    image: 'Dockerfile'
+    env:
+      API_KEY: ${{ inputs.api-key }}
+      HOSTNAME: ${{ inputs.hostname }}
+      NAMESPACE: ${{ inputs.namespace }}
+      NAME: ${{ inputs.module-name }}
+      SYSTEM: ${{ inputs.system }}
+      VERSION: ${{ inputs.version }}
+      MODULES_PATH: ${{ inputs.path }}
