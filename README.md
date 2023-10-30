@@ -16,7 +16,7 @@ Github Action for publishing your modules on your own registry.
 
 ## Example usage
 ```yaml
-uses: craftech-io/publish-terraform-module-action@v1
+uses: craftech-io/publish-terraform-module-action@v1.0.1
 with:
   api-key: ${{ secrets.API_KEY }}
   hostname: https://registry.acme.com
