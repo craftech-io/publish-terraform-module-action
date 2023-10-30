@@ -4,4 +4,6 @@ RUN apt -y update && apt -y install curl wget zip
 
 COPY push_repository.sh /push_repository.sh
 
+RUN chmod -x /push_repository.sh
+
 ENTRYPOINT ["/push_repository.sh"]
