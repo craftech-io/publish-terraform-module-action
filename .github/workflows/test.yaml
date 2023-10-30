@@ -24,3 +24,5 @@ jobs:
           SYSTEM: aws
           VERSION: v0.1.1
           MODULE_PATH: ./test/
+        run:
+          ./push_repository.sh
