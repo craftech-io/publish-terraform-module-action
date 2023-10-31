@@ -39,4 +39,4 @@ runs:
       NAME: ${{ inputs.module-name }}
       SYSTEM: ${{ inputs.system }}
       VERSION: ${{ inputs.version }}
-      MODULES_PATH: ${{ inputs.path }}
+      MODULES_PATH: ${{ inputs.modules-path }}

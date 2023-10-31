@@ -34,11 +34,11 @@ if [ -z "$VERSION" ]; then
         log_error "The version cannot be empty"
 fi
 
-if [ ! -d "$MODULE_PATH" ]; then
-    log_error "The directory '$MODULE_PATH' does not exists."
+if [ ! -d "$MODULES_PATH" ]; then
+    log_error "The directory '$MODULES_PATH' does not exists."
 fi
 
-zip -r modules.zip $MODULE_PATH -x .git\* -x push_repository.sh
+zip -r modules.zip $MODULES_PATH -x .git\* -x push_repository.sh
 echo ''"$HOSTNAME"'/'"$NAMESPACE"'/'"$NAME"'/'"$SYSTEM"'/'"$VERSION"'/upload'
 wget --no-check-certificate -v --method POST --timeout=0 --header "$AUTH" --header 'Content-Type: application/zip' \
         --body-file="$DATA" ''"$HOSTNAME"'/'"$NAMESPACE"'/'"$NAME"'/'"$SYSTEM"'/'"$VERSION"'/upload'

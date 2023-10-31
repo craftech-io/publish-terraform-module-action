@@ -22,7 +22,7 @@ jobs:
           NAMESPACE: ${{ secrets.NAMESPACE }}
           NAME: testModule
           SYSTEM: aws
-          VERSION: v0.1.4
-          MODULE_PATH: ./test/
+          VERSION: v0.1.6
+          MODULES_PATH: ./test/
         run:
           bash ./push_repository.sh
