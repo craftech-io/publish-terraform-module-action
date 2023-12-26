@@ -28,6 +28,14 @@ inputs:
     description: 'Path where the code is.'
     required: true
     default: 'modules/'
+  minor-terraform-version:
+    description: '.'
+    required: true
+    default: '1.0.0'
+  major-terraform-version:
+    description: 'Path where the code is.'
+    required: true
+    default: '1.5.4'
 
 runs:
     using: 'docker'
@@ -40,3 +48,5 @@ runs:
       SYSTEM: ${{ inputs.system }}
       VERSION: ${{ inputs.version }}
       MODULES_PATH: ${{ inputs.modules-path }}
+      MINOR_TERRAFORM_VERSION: ${{ inputs.minor-terraform-version }}
+      MAJOR_TERRAFORM_VERSION: ${{ inputs.major-terraform-version }}
