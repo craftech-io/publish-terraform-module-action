@@ -48,8 +48,8 @@ runs:
     SYSTEM: ${{ inputs.system }}
     VERSION: ${{ inputs.version }}
     MODULES_PATH: ${{ inputs.modules-path }}
-    LOWER_TERRAFORM_VERSION: ${{ inputs.minor-terraform-version }}
-    HIGHER_TERRAFORM_VERSION: ${{ inputs.major-terraform-version }}
+    LOWER_TERRAFORM_VERSION: ${{ inputs.lower-terraform-version }}
+    HIGHER_TERRAFORM_VERSION: ${{ inputs.higher-terraform-version }}
     
 
 
