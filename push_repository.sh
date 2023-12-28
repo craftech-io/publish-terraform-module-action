@@ -35,14 +35,16 @@ if [ -z "$VERSION" ]; then
 fi
 
 if [ ! -d "$MODULES_PATH" ]; then
-    log_error "The directory '$MODULES_PATH' does not exists."
+        log_error "The directory '$MODULES_PATH' does not exists."
 fi
 
-cd $MODULES_PATH
+if [ -n "$LOWER_TERRAFORM_VERSION" ] && [ -n "$HIGHER_TERRAFORM_VERSION"]; then
+        python3 terraform_required_versions.py
+fi
 
-ls -la
+echo 'The terraform required versions are compliant with the desired version range.'
 
-zip -r modules.zip $MODULES_PATH -x .git\* -x push_repository.sh
+zip -r modules.zip $MODULES_PATH -x .git\* -x push_repository.sh -x terraform_required_versions.py
 # echo ''"$HOSTNAME"'/'"$NAMESPACE"'/'"$NAME"'/'"$SYSTEM"'/'"$VERSION"'/upload'
 # wget --no-check-certificate -v --method POST --timeout=0 --header "$AUTH" --header 'Content-Type: application/zip' \
 #         --body-file="$DATA" ''"$HOSTNAME"'/'"$NAMESPACE"'/'"$NAME"'/'"$SYSTEM"'/'"$VERSION"'/upload'

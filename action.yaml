@@ -28,25 +28,29 @@ inputs:
     description: 'Path where the code is.'
     required: true
     default: 'modules/'
-  minor-terraform-version:
-    description: '.'
-    required: true
-    default: '1.0.0'
-  major-terraform-version:
-    description: 'Path where the code is.'
-    required: true
-    default: '1.5.4'
+  lower-terraform-version:
+    description: 'Lower admited terraform version.'
+    required: false
+    default: ''
+  higher-terraform-version:
+    description: 'Higher admited terraform version.'
+    required: false
+    default: ''
 
 runs:
-    using: 'docker'
-    image: 'Dockerfile'
-    env:
-      API_KEY: ${{ inputs.api-key }}
-      HOSTNAME: ${{ inputs.hostname }}
-      NAMESPACE: ${{ inputs.namespace }}
-      NAME: ${{ inputs.module-name }}
-      SYSTEM: ${{ inputs.system }}
-      VERSION: ${{ inputs.version }}
-      MODULES_PATH: ${{ inputs.modules-path }}
-      MINOR_TERRAFORM_VERSION: ${{ inputs.minor-terraform-version }}
-      MAJOR_TERRAFORM_VERSION: ${{ inputs.major-terraform-version }}
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    API_KEY: ${{ inputs.api-key }}
+    HOSTNAME: ${{ inputs.hostname }}
+    NAMESPACE: ${{ inputs.namespace }}
+    NAME: ${{ inputs.module-name }}
+    SYSTEM: ${{ inputs.system }}
+    VERSION: ${{ inputs.version }}
+    MODULES_PATH: ${{ inputs.modules-path }}
+    LOWER_TERRAFORM_VERSION: ${{ inputs.minor-terraform-version }}
+    HIGHER_TERRAFORM_VERSION: ${{ inputs.major-terraform-version }}
+    
+
+
+
