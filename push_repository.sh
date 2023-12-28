@@ -40,9 +40,8 @@ fi
 
 if [ -n "$LOWER_TERRAFORM_VERSION" ] && [ -n "$HIGHER_TERRAFORM_VERSION" ]; then
         python3 /terraform_required_versions.py
+        echo 'The terraform required versions are compliant with the desired version range.'
 fi
-
-echo 'The terraform required versions are compliant with the desired version range.'
 
 zip -r modules.zip $MODULES_PATH -x .git\* -x push_repository.sh -x terraform_required_versions.py
 # echo ''"$HOSTNAME"'/'"$NAMESPACE"'/'"$NAME"'/'"$SYSTEM"'/'"$VERSION"'/upload'
