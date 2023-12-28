@@ -31,11 +31,9 @@ inputs:
   lower-terraform-version:
     description: 'Lower admited terraform version.'
     required: false
-    default: ''
   higher-terraform-version:
     description: 'Higher admited terraform version.'
     required: false
-    default: ''
 
 runs:
   using: 'docker'
