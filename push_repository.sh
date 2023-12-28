@@ -38,8 +38,8 @@ if [ ! -d "$MODULES_PATH" ]; then
         log_error "The directory '$MODULES_PATH' does not exists."
 fi
 
-if [ -n "$LOWER_TERRAFORM_VERSION" ] && [ -n "$HIGHER_TERRAFORM_VERSION"]; then
-python3 /terraform_required_versions.py
+if [ -n "$LOWER_TERRAFORM_VERSION" ] && [ -n "$HIGHER_TERRAFORM_VERSION" ]; then
+        python3 /terraform_required_versions.py
 fi
 
 echo 'The terraform required versions are compliant with the desired version range.'
