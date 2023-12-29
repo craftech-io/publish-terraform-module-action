@@ -11,10 +11,10 @@ file_extention_searched = ".tf"
 
 def look_for_required_versions(modules_path, file_extention_searched):
     required_versions = []
-    for raiz, dirs, files in os.walk(modules_path):
+    for root, dirs, files in os.walk(modules_path):
         for file in files:
             if file.endswith(file_extention_searched):
-                path_to_file = os.path.join(raiz, file)
+                path_to_file = os.path.join(root, file)
                 with open(path_to_file, "r") as file:
                     try:
                         content = file.read()
@@ -35,7 +35,6 @@ def look_for_required_versions(modules_path, file_extention_searched):
     required_versions = list(set(required_versions))
     required_versions = [element.replace(" ", "") for element in required_versions]
     print("The required versions are:", required_versions)
-
     return required_versions
 
 
@@ -51,13 +50,22 @@ def analize_versions(
     )
 
     # The limited range version is configured.
-    higher_version_allowed = semantic_version.Version.coerce(higher_version_allowed)
-    print(f"Higher version allowed: {higher_version_allowed}")
-    lowest_version_allowed = semantic_version.Version.coerce(lowest_version_allowed)
-    print(f"Lowest version allowed: {lowest_version_allowed}")
+    if higher_version_allowed:
+        higher_version_allowed = semantic_version.Version.coerce(higher_version_allowed)
+        print(f"Higher version allowed: {higher_version_allowed}")
+
+    if lowest_version_allowed:
+        lowest_version_allowed = semantic_version.Version.coerce(lowest_version_allowed)
+        print(f"Lowest version allowed: {lowest_version_allowed}")
 
     patron = re.compile(r"^[^0-9]{1,2}")
+
     for version in required_versions:
+        not_comprended_higher = f"The version range {version} is not comprended by the higher limit: <{higher_version_allowed}."
+        comprended_higher = f"The version range {version} is comprended by the higher limit: <{higher_version_allowed}."
+        not_comprended_lower = f"The version range {version} is not comprended by the lower limit: >{lowest_version_allowed}."
+        comprended_lower = f"The version range {version} is comprended by the lower limit: >{lowest_version_allowed}."
+
         match = patron.match(version)
         operator = match.group()
         if operator == "~>":
@@ -75,46 +83,59 @@ def analize_versions(
                 max_version = semantic_version.SimpleSpec(f"<{next_minor}")
                 min_version = semantic_version.SimpleSpec(f">={base_version}")
             else:
-                print(f"La versión '{version}' no tiene un formato reconocido.")
+                print(f"The version '{version}' has not a known format.")
                 sys.exit(1)
 
-            check_higher_compatibility = max_version.match(higher_version_allowed)
-            check_base_version_compatibility = min_version.match(lowest_version_allowed)
+            if higher_version_allowed:
+                check_higher_compatibility = max_version.match(higher_version_allowed)
+                if check_higher_compatibility:
+                    print(not_comprended_higher)
+                    sys.exit(1)
+                else:
+                    print(comprended_higher)
 
-            if check_higher_compatibility or check_base_version_compatibility:
-                print(
-                    f"The version range {version} is not comprended by the limits: >{lowest_version_allowed} and <{higher_version_allowed}."
+            if lowest_version_allowed:
+                check_base_version_compatibility = min_version.match(
+                    lowest_version_allowed
                 )
-                sys.exit(1)
-            else:
-                print(
-                    f"The version range {version} is comprended by the limits: >{lowest_version_allowed} and <{higher_version_allowed}."
-                )
+                if check_base_version_compatibility:
+                    print(not_comprended_lower)
+                    sys.exit(1)
+                else:
+                    print(comprended_lower)
 
-        elif operator == "=":
+        elif (
+            operator == "="
+            or operator == ">"
+            or operator == "<"
+            or operator == ">="
+            or operator == "<="
+            or operator == "!="
+        ):
             base_version = semantic_version.SimpleSpec(version)
-            check_higher_compatibility = base_version.match(lowest_version_allowed)
-            check_lower_compatibility = base_version.match(higher_version_allowed)
-            if check_higher_compatibility or check_lower_compatibility:
-                print(
-                    f"The version {version} is not comprended by the version range: >{lowest_version_allowed} and <{higher_version_allowed}."
-                )
-                sys.exit(1)
-            print(
-                f"The version {version} is comprended by the version range:  >{lowest_version_allowed} and <{higher_version_allowed}."
-            )
 
-        elif operator == ">" or operator == "<" or operator == ">=" or operator == "<=":
-            print(
-                f"The version {version} could be higher than {higher_version_allowed} or lower than {lowest_version_allowed}"
-            )
-            sys.exit(1)
+            if higher_version_allowed:
+                check_higher_compatibility = base_version.match(higher_version_allowed)
+                if check_higher_compatibility:
+                    print(not_comprended_higher)
+                    sys.exit(1)
+                else:
+                    print(comprended_higher)
+
+            if lowest_version_allowed:
+                check_base_version_compatibility = base_version.match(
+                    lowest_version_allowed
+                )
+                if check_base_version_compatibility:
+                    print(not_comprended_lower)
+                    sys.exit(1)
+                else:
+                    print(comprended_lower)
 
         else:
-            print(
-                f"The version {version} is not comprended by the version range: >{lowest_version_allowed} and <{higher_version_allowed}."
-            )
+            print(f"The version {version} is not a valid terraform operator.")
             sys.exit(1)
+
 
 required_terraform_versions = analize_versions(
     higher_version_allowed,
