@@ -30,6 +30,8 @@ if [ -z "$NAME" ]; then
         log_error "The name cannot be empty"
 fi
 
+VERSION=${VERSION#v}
+
 if [ -z "$VERSION" ]; then
         log_error "The version cannot be empty"
 fi
