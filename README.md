@@ -18,7 +18,7 @@ Github Action for publishing your modules on your own registry.
 
 ## Example usage
 ```yaml
-uses: craftech-io/publish-terraform-module-action@v1.0.1
+uses: craftech-io/publish-terraform-module-action@v1.1.1
 with:
   api-key: ${{ secrets.API_KEY }}
   hostname: https://registry.acme.com
@@ -28,7 +28,7 @@ with:
   version: v1.0.0
   modules-path: modules/
 ```
-The example above will upload your code to `https://registry.acme.com/example/ecr/aws/v1.0.0`
+The example above will upload your code to `https://registry.acme.com/example/ecr/aws/1.0.0`
 
 ## Optional arguments
 The Action lets you configure a higher, lower or both terraform required version limits. The Action will check if the terraform modules comply with it before zipping and uploading the modules to the registry.
