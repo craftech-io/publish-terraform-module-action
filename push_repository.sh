@@ -30,6 +30,8 @@ if [ -z "$NAME" ]; then
         log_error "The name cannot be empty"
 fi
 
+VERSION=${VERSION#v}
+
 if [ -z "$VERSION" ]; then
         log_error "The version cannot be empty"
 fi
@@ -43,9 +45,7 @@ if [ -n "$LOWER_TERRAFORM_VERSION" ] || [ -n "$HIGHER_TERRAFORM_VERSION" ]; then
         echo 'The terraform required versions are compliant with the desired version range.'
 fi
 
-CLEAN_VERSION=${VERSION#v}
-
 zip -r modules.zip $MODULES_PATH -x .git\* -x push_repository.sh -x terraform_required_versions.py
-echo ''"$HOSTNAME"'/'"$NAMESPACE"'/'"$NAME"'/'"$SYSTEM"'/'"$CLEAN_VERSION"'/upload'
+echo ''"$HOSTNAME"'/'"$NAMESPACE"'/'"$NAME"'/'"$SYSTEM"'/'"$VERSION"'/upload'
 wget --no-check-certificate -v --method POST --timeout=0 --header "$AUTH" --header 'Content-Type: application/zip' \
-        --body-file="$DATA" ''"$HOSTNAME"'/'"$NAMESPACE"'/'"$NAME"'/'"$SYSTEM"'/'"$CLEAN_VERSION"'/upload'
+        --body-file="$DATA" ''"$HOSTNAME"'/'"$NAMESPACE"'/'"$NAME"'/'"$SYSTEM"'/'"$VERSION"'/upload'
