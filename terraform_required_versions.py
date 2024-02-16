@@ -9,11 +9,13 @@ HIGHER_VERSION_ALLOWED = os.environ.get("HIGHER_TERRAFORM_VERSION")
 LOWEST_VERSION_ALLOWED = os.environ.get("LOWER_TERRAFORM_VERSION")
 FILE_EXTENSION_SEARCHED = ".tf"
 
-# This function looks for all the files in the MODULES_PATH path that ends
-# with the FILE_EXTENSION_SEARCHED extension, parses these files, extracts
-# the required_version from terraform if exists, and
-# appends it to the required_versions variable.
 def look_for_required_versions(modules_path, file_extension_searched):
+    """
+    This function looks for all the files in the MODULES_PATH path that ends
+    with the FILE_EXTENSION_SEARCHED extension, parses these files, extracts
+    the required_version from terraform if exists, and
+    appends it to the required_versions variable.
+    """
     required_versions = []
     for root, _, files in os.walk(modules_path):
         for file in files:
@@ -39,18 +41,19 @@ def look_for_required_versions(modules_path, file_extension_searched):
     print("The required versions are:", required_versions)
     return required_versions
 
-
-# This function invokes the look_for_required_versions function, for
-# each version in the required_versions variable calculates the max and
-# min terraform versions, and compares them with the version limits
-# configured through HIGHER_VERSION_ALLOWED and LOWEST_VERSION_ALLOWED.
-# If some version is outside the limits, the function sends a sys exit = 1
 def analize_versions(
     higher_version_allowed,
     lowest_version_allowed,
     modules_path,
     file_extension_searched,
 ):
+    """
+    This function invokes the look_for_required_versions function, for
+    each version in the required_versions variable calculates the max and
+    min terraform versions, and compares them with the version limits
+    configured through HIGHER_VERSION_ALLOWED and LOWEST_VERSION_ALLOWED.
+    If some version is outside the limits, the function sends a sys exit = 1
+    """
     # The required versions are obtained.
     required_versions = look_for_required_versions(
         modules_path, file_extension_searched

@@ -24,16 +24,20 @@ inputs:
   version:
     description: 'Version of the module.'
     required: true
-  modules-path:
+  path-to-zip:
     description: 'Path where the code is.'
     required: true
-    default: 'modules/'
+    default: './'
   lower-terraform-version:
     description: 'Lower admited terraform version.'
     required: false
   higher-terraform-version:
     description: 'Higher admited terraform version.'
     required: false
+  paths-files-to-exclude:
+    description: 'List of paths and files to exclude in the package.'
+    required: false
+    default: ''
 
 runs:
   using: 'docker'
@@ -45,9 +49,10 @@ runs:
     NAME: ${{ inputs.module-name }}
     SYSTEM: ${{ inputs.system }}
     VERSION: ${{ inputs.version }}
-    MODULES_PATH: ${{ inputs.modules-path }}
+    MODULES_PATH: ${{ inputs.path-to-zip }}
     LOWER_TERRAFORM_VERSION: ${{ inputs.lower-terraform-version }}
     HIGHER_TERRAFORM_VERSION: ${{ inputs.higher-terraform-version }}
+    EXCLUDE: ${{ inputs.paths-files-to-exclude }}
     
 
 
