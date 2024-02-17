@@ -31,6 +31,8 @@ with:
 The example above will upload your code to `https://registry.acme.com/example/ecr/aws/1.0.0`
 
 ## Optional arguments
+
+### Higher and lower terraform required version
 The Action lets you configure a higher, lower or both terraform required version limits. The Action will check if the terraform modules comply with it before zipping and uploading the modules to the registry.
 
 Example: 
@@ -43,6 +45,20 @@ with:
 ```
 The values of these variables are not included in the allowed range. With those values, the allowed range will be >1.0.0 and <1.6.0.
 
+### Paths and files to exclude
+
+The Action lets you exclude some folders and files from the package. For example, you want to exclude the test or a random folder that is in your repository.
+
+The paths-files-to-exclude variable value could be a list of folders and files as:
+
+```yaml
+with:
+  ... 
+  ...
+  paths-files-to-exclude: "/asd/* test.tf"
+
+```
+In the above example, the "asd" folder and subfolders and subfiles will be excluded from the package. Also, the test.tf file from the root directory will be excluded.
 
 # :warning: Public Repository Warning
 
