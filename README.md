@@ -12,7 +12,7 @@ Github Action for publishing your modules on your own registry.
 | `module-name`             | String | Name of the module.                                                                                                          |
 | `system`                  | String | Name of a remote system that the module is primarily written to target.                                                       |
 | `version`                 | String | Version of the module.                                                                                                       |
-| `modules-path`            | String | ath where the code is.                                                                                                       |
+| `path-to-zip`            | String | ath where the code is.                                                                                                       |
 | `lower-terraform-version` | Number | Lower allowed terraform version.                                                                                                      |
 | `higher-terraform-version`| Number | Higher allowed terraform version.                                                                                                      |
 
@@ -26,7 +26,7 @@ with:
   module-name: ecr
   system: aws
   version: v1.0.0
-  modules-path: modules/
+  path-to-zip: modules/
 ```
 The example above will upload your code to `https://registry.acme.com/example/ecr/aws/1.0.0`
 
