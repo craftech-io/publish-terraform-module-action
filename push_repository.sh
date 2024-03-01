@@ -51,4 +51,6 @@ echo ''"$HOSTNAME"'/'"$NAMESPACE"'/'"$NAME"'/'"$SYSTEM"'/'"$VERSION"'/upload'
 if [ "$DRY_RUN" = "false" ]; then
         wget --no-check-certificate -v --method POST --timeout=0 --header "$AUTH" --header 'Content-Type: application/zip' \
              --body-file="$DATA" ''"$HOSTNAME"'/'"$NAMESPACE"'/'"$NAME"'/'"$SYSTEM"'/'"$VERSION"'/upload'
+else
+        echo "(DRY-RUN) Won\'t push anything to Terraform Registry"
 fi
