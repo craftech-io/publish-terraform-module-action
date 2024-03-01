@@ -12,7 +12,7 @@ Github Action for publishing your modules on your own registry.
 | `module-name`              | String | Name of the module.                                                                                                         |
 | `system`                   | String | Name of a remote system that the module is primarily written to target.                                                     |
 | `version`                  | String | Version of the module.                                                                                                      |
-| `path-to-zip`             | String | Path where the code is.                                                                                                      |
+| `path-to-zip`              | String | Path where the code is.                                                                                                     |
 | `lower-terraform-version`  | Number | Lower allowed terraform version.                                                                                            |
 | `higher-terraform-version` | Number | Higher allowed terraform version.                                                                                           |
 | `dry-run`                  | String | Whether or not to perform a dry run (without pushing the module to the registry).                                           |
