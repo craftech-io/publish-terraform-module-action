@@ -24,5 +24,6 @@ jobs:
           SYSTEM: aws
           VERSION: v0.1.6+${{ github.sha }}
           MODULES_PATH: ./test/
+          DRY_RUN: 'false'
         run:
           bash ./push_repository.sh
