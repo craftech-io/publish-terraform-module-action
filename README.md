@@ -4,17 +4,18 @@ Github Action for publishing your modules on your own registry.
 ## Customizing
 ### Inputs
 
-| Name                      | Type   | Description                                                                                                                  |
-|---------------------------|--------|------------------------------------------------------------------------------------------------------------------------------|
-| `api-key`                 | String | API Key used to authenticate to the registry.                                                                                |
-| `hostname`                | String | URL of your registry.                                                                                                        |
-| `namespace`               | String | Is the name of a namespace, unique on a particular hostname, that can contain one or more modules that are somehow related.  |
-| `module-name`             | String | Name of the module.                                                                                                          |
-| `system`                  | String | Name of a remote system that the module is primarily written to target.                                                       |
-| `version`                 | String | Version of the module.                                                                                                       |
-| `modules-path`            | String | ath where the code is.                                                                                                       |
-| `lower-terraform-version` | Number | Lower allowed terraform version.                                                                                                      |
-| `higher-terraform-version`| Number | Higher allowed terraform version.                                                                                                      |
+| Name                       | Type   | Description                                                                                                                 |
+| -------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------- |
+| `api-key`                  | String | API Key used to authenticate to the registry.                                                                               |
+| `hostname`                 | String | URL of your registry.                                                                                                       |
+| `namespace`                | String | Is the name of a namespace, unique on a particular hostname, that can contain one or more modules that are somehow related. |
+| `module-name`              | String | Name of the module.                                                                                                         |
+| `system`                   | String | Name of a remote system that the module is primarily written to target.                                                     |
+| `version`                  | String | Version of the module.                                                                                                      |
+| `path-to-zip`              | String | Path where the code is.                                                                                                     |
+| `lower-terraform-version`  | Number | Lower allowed terraform version.                                                                                            |
+| `higher-terraform-version` | Number | Higher allowed terraform version.                                                                                           |
+| `dry-run`                  | String | Whether or not to perform a dry run (without pushing the module to the registry).                                           |
 
 ## Example usage
 ```yaml
@@ -26,7 +27,8 @@ with:
   module-name: ecr
   system: aws
   version: v1.0.0
-  modules-path: modules/
+  path-to-zip: modules/
+  dry-run: 'false'
 ```
 The example above will upload your code to `https://registry.acme.com/example/ecr/aws/1.0.0`
 
