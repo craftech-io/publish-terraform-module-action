@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/python:3.9.13-slim-buster
+FROM public.ecr.aws/docker/library/python:3.9.23-slim-bookworm
 
 RUN apt -y update && apt -y install curl wget zip
 
